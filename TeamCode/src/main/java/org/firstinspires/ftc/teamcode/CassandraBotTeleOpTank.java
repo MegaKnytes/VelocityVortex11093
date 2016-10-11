@@ -96,10 +96,12 @@ public class CassandraBotTeleOpTank extends OpMode{
      */
     @Override
     public void loop() {
-        double left;
-        double right;
+        double left = 0.0;
+        double right = 0.0;
+        double sweeper = 0.0;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
+        // device name 'left_drive' and 'right_drive'
         left = -gamepad1.left_stick_y;
         right = -gamepad1.right_stick_y;
         robot.leftMotor.setPower(left);
@@ -107,7 +109,21 @@ public class CassandraBotTeleOpTank extends OpMode{
 
         telemetry.addData("left",  "%.2f", left);
         telemetry.addData("right", "%.2f", right);
+
+        // Run sweeper forward and backward (device name 'sweeper_drive')
+        sweeper = -gamepad2.right_stick_y;
+        robot.sweeperMotor.setPower(sweeper);
+        telemetry.addData("sweeper", "%.2f", sweeper);
+
+        // test to examine optical distance sensor data (device name 'ods')
+        //double odsLightDetected = robot.opticalDistanceSensor.getLightDetected();
+        //double odsRawLightDetected = robot.opticalDistanceSensor.getRawLightDetected();
+        //telemetry.addData("Raw",    odsRawLightDetected);
+        //telemetry.addData("Normal", odsLightDetected);
+
         updateTelemetry(telemetry);
+
+
     }
 
     /*
