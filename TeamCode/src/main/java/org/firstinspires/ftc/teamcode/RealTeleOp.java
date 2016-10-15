@@ -55,8 +55,8 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="CassandraBot: Teleop Tank", group="CassandraBot")
-public class CassandraBotTeleOpTank extends OpMode{
+@TeleOp(name="CassandraBot: RealTeleop", group="CassandraBot")
+public class RealTeleOp extends OpMode{
 
     /* Declare OpMode members. */
     HardwareCassandraBot robot       = new HardwareCassandraBot(); // use the class created to define a Pushbot's hardware
@@ -96,31 +96,33 @@ public class CassandraBotTeleOpTank extends OpMode{
      */
     @Override
     public void loop() {
-        double left = 0.0;
-        double right = 0.0;
+        boolean left = false;
+        boolean right = false;
         double sweeper = 0.0;
-        boolean right_bumper = false;
+        boolean sweaper = false;
+
+        int lint = (left) ? -1:1;
+        int rint = (right) ? 1:-1;
+        int sweapint = (sweaper) ? 0:1;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         // device name 'left_drive' and 'right_drive'
-        left = -gamepad1.left_stick_y;
-        right = -gamepad1.right_stick_y;
-        right_bumper = gamepad1.right_bumper;
+        left = gamepad1.dpad_down;
+        right = gamepad1.left_bumper;
+        robot.leftMotor.setPower(lint);
+        robot.rightMotor.setPower(rint);
 
-        int rbumperint = (right_bumper) ? 4:1;
-
-        robot.leftMotor.setPower(left/rbumperint);
-        robot.rightMotor.setPower(right/rbumperint);
-
-
-        //Run sweeper forward and backward (device name 'sweeper_drive')
-        sweeper = -gamepad2.right_stick_y;
-        robot.sweeperMotor.setPower(sweeper);
-
-        telemetry.addData("sweeper", "%.2f", sweeper);
         telemetry.addData("left",  "%.2f", left);
         telemetry.addData("right", "%.2f", right);
-        telemetry.addData("rbumperint", rbumperint);
+
+        // Run sweeper forward and backward (device name 'sweeper_drive')
+        //sweeper = -gamepad2.right_stick_y;
+        sweaper = gamepad2.x;
+
+        //robot.sweeperMotor.setPower(sweeper);
+        robot.sweeperMotor.setPower(sweapint);
+        //telemetry.addData("sweeper", "%.2f", sweeper);
+        telemetry.addData("sweaper", "%.2f", sweaper);
 
         // test to examine optical distance sensor data (device name 'ods')
         //double odsLightDetected = robot.opticalDistanceSensor.getLightDetected();
