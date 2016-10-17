@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -25,7 +26,7 @@ public class HardwareCassandraBot
     public DcMotor  rightMotor  = null;
     public DcMotor  sweeperMotor = null;
     //public OpticalDistanceSensor opticalDistanceSensor = null;
-
+    //public TouchSensor touchSense = null;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -42,6 +43,7 @@ public class HardwareCassandraBot
         hwMap = ahwMap;
 
         //opticalDistanceSensor = hwMap.opticalDistanceSensor.get("ods");
+        //touchSense = hwMap.touchSensor.get("touch_sensor");
 
         // Define and Initialize Motors
         leftMotor   = hwMap.dcMotor.get("left_drive");
