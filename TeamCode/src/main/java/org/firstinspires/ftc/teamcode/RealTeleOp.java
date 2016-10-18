@@ -112,8 +112,8 @@ public class RealTeleOp extends OpMode{
         robot.leftMotor.setPower(lint);
         robot.rightMotor.setPower(rint);
 
-        telemetry.addData("left",  "%.2f", left);
-        telemetry.addData("right", "%.2f", right);
+        //telemetry.addData("left",  "%.2f", left);
+        //telemetry.addData("right", "%.2f", right);
 
         // Run sweeper forward and backward (device name 'sweeper_drive')
         //sweeper = -gamepad2.right_stick_y;
@@ -122,7 +122,7 @@ public class RealTeleOp extends OpMode{
         //robot.sweeperMotor.setPower(sweeper);
         robot.sweeperMotor.setPower(sweapint);
         //telemetry.addData("sweeper", "%.2f", sweeper);
-        telemetry.addData("sweaper", "%.2f", sweaper);
+        //telemetry.addData("sweaper", sweaper);
 
         // test to examine optical distance sensor data (device name 'ods')
         //double odsLightDetected = robot.opticalDistanceSensor.getLightDetected();

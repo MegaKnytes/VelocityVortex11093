@@ -5,13 +5,15 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 
 /**
  * This is NOT an opmode.
  *
  * This class can be used to define all the specific hardware for a single robot.
- * In this case that robot is a Cassandra.
+ * In this case that robot is Cassandra.
  *
  * This hardware class assumes the following device names have been configured on the robot:
  * Note:  All names are lower case and some have single spaces between words.
@@ -27,6 +29,8 @@ public class HardwareCassandraBot
     public DcMotor  sweeperMotor = null;
     //public OpticalDistanceSensor opticalDistanceSensor = null;
     //public TouchSensor touchSense = null;
+    public ColorSensor sensorRGB;
+
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
