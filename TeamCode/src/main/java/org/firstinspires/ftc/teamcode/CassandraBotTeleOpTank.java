@@ -37,23 +37,10 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.HardwareCassandraBot;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+import static android.os.SystemClock.sleep;
 
-/**
- * This file provides basic Telop driving for a Pushbot robot.
- * The code is structured as an Iterative OpMode
- *
- * This OpMode uses the common Pushbot hardware class to define the devices on the robot.
- * All device access is managed through the HardwarePushbot class.
- *
- * This particular OpMode executes a basic Tank Drive Teleop for a PushBot
- * It raises and lowers the claw using the Gampad Y and A buttons respectively.
- * It also opens and closes the claws slowly using the left and right Bumper buttons.
- *
- * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
- */
 
 @TeleOp(name="CassandraBot: Teleop Tank", group="CassandraBot")
 public class CassandraBotTeleOpTank extends OpMode{
@@ -83,6 +70,7 @@ public class CassandraBotTeleOpTank extends OpMode{
     @Override
     public void init_loop() {
     }
+    double position = .5;
 
     /*
      * Code to run ONCE when the driver hits PLAY
@@ -99,7 +87,14 @@ public class CassandraBotTeleOpTank extends OpMode{
         double left = 0.0;
         double right = 0.0;
         double sweeper = 0.0;
-        boolean right_bumper = false;
+        double max_pos = 1.0;
+        double min_pos = 0.0;
+        double increment = 0.01;
+        double cycleMS = 50;
+        boolean right_bumper1;
+        boolean right_bumper2;
+        boolean left_bumper2;
+
         //double senseLight = 0.0;
         //boolean senseTouch;
 
@@ -107,12 +102,12 @@ public class CassandraBotTeleOpTank extends OpMode{
         // device name 'left_drive' and 'right_drive'
         left = -gamepad1.left_stick_y;
         right = -gamepad1.right_stick_y;
-        right_bumper = gamepad1.right_bumper;
+        right_bumper1 = gamepad1.right_bumper;
 
-        int rbumperint = (right_bumper) ? 8:1;
+        int rbumper1int = (right_bumper1) ? 8:1;
 
-        robot.leftMotor.setPower(left/rbumperint);
-        robot.rightMotor.setPower(right/rbumperint);
+        robot.leftMotor.setPower(left/rbumper1int);
+        robot.rightMotor.setPower(right/rbumper1int);
         //senseLight = robot.opticalDistanceSensor.getLightDetected();
         //senseTouch = robot.touchSense.isPressed();
 
@@ -121,10 +116,28 @@ public class CassandraBotTeleOpTank extends OpMode{
         sweeper = -gamepad2.right_stick_y;
         robot.sweeperMotor.setPower(sweeper);
 
+        //Button Motor left and right, using right and left bumper on gamepad 2 (Device name 'button_drive')
+        right_bumper2 = gamepad2.right_bumper;
+        left_bumper2 = gamepad2.left_bumper;
+
+        if (right_bumper2 && position<max_pos)
+        {
+            position += increment;
+            sleep(50);
+        }
+
+        else if (left_bumper2 && position<min_pos)
+        {
+            position -= increment;
+            sleep(50);
+        }
+        robot.buttonMotor.setPosition(position);
+
         telemetry.addData("sweeper", "%.2f", sweeper);
         telemetry.addData("left",  "%.2f", left);
         telemetry.addData("right", "%.2f", right);
-        telemetry.addData("rbumperint", rbumperint);
+        telemetry.addData("rbumper1int", rbumper1int);
+        telemetry.addData("Servo Position", position);
         //telemetry.addData("senseLight", "%.3f", senseLight);
         //telemetry.addData("touchsensor", senseTouch);
 

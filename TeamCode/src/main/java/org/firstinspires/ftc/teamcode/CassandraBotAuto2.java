@@ -74,8 +74,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 
-@Autonomous(name="FarLeft", group="Cassandra")
-public class CassandraBotAuto extends LinearOpMode {
+@Autonomous(name="FarRight", group="Cassandra")
+public class CassandraBotAuto2 extends LinearOpMode {
 
 
     /* Declare OpMode members. */
@@ -134,7 +134,7 @@ public class CassandraBotAuto extends LinearOpMode {
         sleep(200);
 
 
-        encoderDrive(TURN_SPEED,   -4, 4, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
+        encoderDrive(TURN_SPEED,   4, -4, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
         // 4 inches should be around 45 degrees, but that is not much better than a guess.
         //I think that 90 degrees is around 7-8 inches, but I might be wrong.
         sleep(200);
