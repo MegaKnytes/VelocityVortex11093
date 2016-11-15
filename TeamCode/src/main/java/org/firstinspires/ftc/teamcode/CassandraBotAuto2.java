@@ -134,13 +134,13 @@ public class CassandraBotAuto2 extends LinearOpMode {
         sleep(200);
 
 
-        encoderDrive(TURN_SPEED,   4, -4, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
+        encoderDrive(TURN_SPEED,   6, -6, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
         // 4 inches should be around 45 degrees, but that is not much better than a guess.
         //I think that 90 degrees is around 7-8 inches, but I might be wrong.
         sleep(200);
 
 
-        encoderDrive(DRIVE_SPEED, 41, 41, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 42, 42, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
 

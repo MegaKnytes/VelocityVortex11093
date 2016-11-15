@@ -74,7 +74,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 
-@Autonomous(name="CloseLeft", group="Cassandra")
+@Autonomous(name="CloseBoth", group="Cassandra")
 public class CassandraBotAuto1 extends LinearOpMode {
 
 
@@ -130,7 +130,7 @@ public class CassandraBotAuto1 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  30,  30, 5.0);  // S1: Forward 60 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  54,  54, 5.0);  // S1: Forward 60 Inches with 5 Sec timeout
         sleep(200);
 
 

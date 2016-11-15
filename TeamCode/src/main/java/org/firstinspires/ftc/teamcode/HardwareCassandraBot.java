@@ -59,7 +59,7 @@ public class HardwareCassandraBot
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         sweeperMotor.setDirection(DcMotor.Direction.FORWARD);
-        buttonMotor.setPosition(.5);
+        //buttonMotor.setPosition(.5);
 
         // Set all motors to zero power
         leftMotor.setPower(0);

@@ -126,7 +126,7 @@ public class CassandraBotTeleOpTank extends OpMode{
             sleep(50);
         }
 
-        else if (left_bumper2 && position<min_pos)
+        else if (left_bumper2 && position>min_pos)
         {
             position -= increment;
             sleep(50);
