@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -28,7 +27,6 @@ public class HardwareCassandraBot
     public DcMotor  leftMotor   = null;
     public DcMotor  rightMotor  = null;
     public DcMotor  sweeperMotor = null;
-    public Servo  buttonMotor = null;
     //public OpticalDistanceSensor opticalDistanceSensor = null;
     //public TouchSensor touchSense = null;
     public ColorSensor sensorRGB;
@@ -55,7 +53,6 @@ public class HardwareCassandraBot
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
         sweeperMotor = hwMap.dcMotor.get("sweeper_drive");
-        buttonMotor = hwMap.servo.get("button_drive");
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         sweeperMotor.setDirection(DcMotor.Direction.FORWARD);

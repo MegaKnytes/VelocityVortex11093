@@ -87,13 +87,8 @@ public class CassandraBotTeleOpTank extends OpMode{
         double left = 0.0;
         double right = 0.0;
         double sweeper = 0.0;
-        double max_pos = 1.0;
-        double min_pos = 0.0;
-        double increment = 0.01;
-        double cycleMS = 50;
         boolean right_bumper1;
-        boolean right_bumper2;
-        boolean left_bumper2;
+
 
         //double senseLight = 0.0;
         //boolean senseTouch;
@@ -116,28 +111,11 @@ public class CassandraBotTeleOpTank extends OpMode{
         sweeper = -gamepad2.right_stick_y;
         robot.sweeperMotor.setPower(sweeper);
 
-        //Button Motor left and right, using right and left bumper on gamepad 2 (Device name 'button_drive')
-        right_bumper2 = gamepad2.right_bumper;
-        left_bumper2 = gamepad2.left_bumper;
-
-        if (right_bumper2 && position<max_pos)
-        {
-            position += increment;
-            sleep(50);
-        }
-
-        else if (left_bumper2 && position>min_pos)
-        {
-            position -= increment;
-            sleep(50);
-        }
-        robot.buttonMotor.setPosition(position);
 
         telemetry.addData("sweeper", "%.2f", sweeper);
         telemetry.addData("left",  "%.2f", left);
         telemetry.addData("right", "%.2f", right);
         telemetry.addData("rbumper1int", rbumper1int);
-        telemetry.addData("Servo Position", position);
         //telemetry.addData("senseLight", "%.3f", senseLight);
         //telemetry.addData("touchsensor", senseTouch);
 
