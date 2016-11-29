@@ -115,6 +115,7 @@ public class CassandraBotAuto1 extends LinearOpMode {
 
         robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         // Send telemetry message to indicate successful Encoder reset
@@ -130,17 +131,26 @@ public class CassandraBotAuto1 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  6,  6, 5.0);  // S1: Forward 3 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  21,  21, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
         sleep(200);
 
 
-        encoderDrive(TURN_SPEED,   -8, 8, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
+        encoderDrive(TURN_SPEED,   -9, 9, 0, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
         // 4 inches should be around 45 degrees, but that is not much better than a guess.
         //I think that 90 degrees is around 7-8 inches, but I might be wrong.
         sleep(200);
 
 
-        encoderDrive(DRIVE_SPEED, 70, 70, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 45, 45, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        sleep(200);
+
+        encoderDrive(TURN_SPEED, -4, 4, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        sleep(200);
+
+        encoderDrive(DRIVE_SPEED, 0, 0, 1, 2.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        sleep(200);
+
+        encoderDrive(DRIVE_SPEED,  18,  18, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
         sleep(200);
 
 
@@ -158,10 +168,11 @@ public class CassandraBotAuto1 extends LinearOpMode {
      *  3) Driver stops the opmode running.
      */
     public void encoderDrive(double speed,
-                             double leftInches, double rightInches,
+                             double leftInches, double rightInches, double sweeperPower,
                              double timeoutS) throws InterruptedException {
         int newLeftTarget;
         int newRightTarget;
+        int newSweeperTarget;
 
 
         // Ensure that the opmode is still active
@@ -171,25 +182,29 @@ public class CassandraBotAuto1 extends LinearOpMode {
             // Determine new target position, and pass to motor controller
             newLeftTarget = robot.leftMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
             newRightTarget = robot.rightMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newSweeperTarget = robot.sweeperMotor.getCurrentPosition() + (int)(sweeperPower * COUNTS_PER_INCH);
             robot.leftMotor.setTargetPosition(newLeftTarget);
             robot.rightMotor.setTargetPosition(newRightTarget);
+            robot.sweeperMotor.setTargetPosition(newSweeperTarget);
 
 
             // Turn On RUN_TO_POSITION
             robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
             // reset the timeout time and START motion.
             runtime.reset();
             robot.leftMotor.setPower(Math.abs(speed));
             robot.rightMotor.setPower(Math.abs(speed));
+            robot.sweeperMotor.setPower(sweeperPower);
 
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
                     (runtime.seconds() < timeoutS) &&
-                    (robot.leftMotor.isBusy() && robot.rightMotor.isBusy())) {
+                    (robot.leftMotor.isBusy() && robot.rightMotor.isBusy() || robot.sweeperMotor.isBusy())) {
 
 
                 // Display it for the driver.
@@ -208,11 +223,13 @@ public class CassandraBotAuto1 extends LinearOpMode {
             // Stop all motion;
             robot.leftMotor.setPower(0);
             robot.rightMotor.setPower(0);
+            robot.sweeperMotor.setPower(0);
 
 
             // Turn off RUN_TO_POSITION
             robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
             //  sleep(250);   // optional pause after each move
