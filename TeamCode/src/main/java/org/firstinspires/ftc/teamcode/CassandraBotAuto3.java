@@ -131,26 +131,29 @@ public class CassandraBotAuto3 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  21,  21, 0, 5.0);  // S1: Forward 60 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  23,  23, 0, 5.0);  // S1: Forward 60 Inches with 5 Sec timeout
         sleep(200);
 
 
-        encoderDrive(TURN_SPEED,   8, -8, 0, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
+        encoderDrive(TURN_SPEED,   10, -10, 0, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
         // 4 inches should be around 45 degrees, but that is not much better than a guess.
         //I think that 90 degrees is around 7-8 inches, but I might be wrong.
         sleep(200);
 
 
-        encoderDrive(DRIVE_SPEED, 45, 45, 0, 5.0);  // S3: Forward 70 Inches with 8 Sec timeout
+        encoderDrive(DRIVE_SPEED, 40, 40, 0, 5.0);  // S3: Forward 70 Inches with 8 Sec timeout
         sleep(200);
 
-        encoderDrive(TURN_SPEED, 4, -4, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, 7, -7, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
-        encoderDrive(DRIVE_SPEED, 0, 0, 1, 2.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 4, 4, 0, 5.0);  // S3: Forward 70 Inches with 8 Sec timeout
         sleep(200);
 
-        encoderDrive(DRIVE_SPEED,  18,  18, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 0, 0, 1, 3.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        sleep(200);
+
+        encoderDrive(DRIVE_SPEED,  25,  25, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
         sleep(200);
 
         telemetry.addData("Path", "Complete");

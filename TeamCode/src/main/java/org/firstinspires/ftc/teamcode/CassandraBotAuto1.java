@@ -131,7 +131,7 @@ public class CassandraBotAuto1 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  21,  21, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  24,  24, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
         sleep(200);
 
 
@@ -141,16 +141,20 @@ public class CassandraBotAuto1 extends LinearOpMode {
         sleep(200);
 
 
-        encoderDrive(DRIVE_SPEED, 45, 45, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 39, 39, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
         encoderDrive(TURN_SPEED, -4, 4, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
-        encoderDrive(DRIVE_SPEED, 0, 0, 1, 2.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        //amy
+        encoderDrive(DRIVE_SPEED, 4, 4, 0, 5.0);  // S3: Forward 70 Inches with 8 Sec timeout
         sleep(200);
 
-        encoderDrive(DRIVE_SPEED,  18,  18, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 0, 0, 1, 3.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        sleep(200);
+
+        encoderDrive(DRIVE_SPEED,  25,  25, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
         sleep(200);
 
 
