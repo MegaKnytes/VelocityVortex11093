@@ -144,7 +144,7 @@ public class CassandraBotAuto1 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 39, 39, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
-        encoderDrive(TURN_SPEED, -4, 4, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, -3.75, 3.75, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
         //amy
