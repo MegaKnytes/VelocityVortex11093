@@ -28,8 +28,7 @@ public class HardwareCassandraBot
     public DcMotor  leftMotor   = null;
     public DcMotor  rightMotor  = null;
     public DcMotor  sweeperMotor = null;
-    //public DcMotor  shooter1Motor = null;
-    //public DcMotor  shooter2Motor = null;
+    public DcMotor  shooterMotor = null;
     //public OpticalDistanceSensor opticalDistanceSensor = null;
     //public TouchSensor touchSense = null;
     //public ColorSensor sensorRGB;
@@ -56,21 +55,18 @@ public class HardwareCassandraBot
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
         sweeperMotor = hwMap.dcMotor.get("sweeper_drive");
-        //shooter1Motor = hwMap.dcMotor.get("shooter_drive");
-        //shooter2Motor = hwMap.dcMotor.get("shooter_drive");
+        shooterMotor = hwMap.dcMotor.get("shooter_drive");
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         sweeperMotor.setDirection(DcMotor.Direction.FORWARD);
-        //shooter1Motor.setDirection(DcMotor.Direction.FORWARD);
-        //shooter2Motor.setDirection(DcMotor.Direction.FORWARD);
+        shooterMotor.setDirection(DcMotor.Direction.FORWARD);
         //buttonMotor.setPosition(.5);
 
         // Set all motors to zero power
         leftMotor.setPower(0);
         rightMotor.setPower(0);
         sweeperMotor.setPower(0);
-        //shooter1Motor.setPower(0);
-        //shooter2Motor.setPower(0);
+        shooterMotor.setPower(0);
 
 
         // Set all motors to run without encoders.
@@ -78,8 +74,7 @@ public class HardwareCassandraBot
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //shooter1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //shooter2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
     }

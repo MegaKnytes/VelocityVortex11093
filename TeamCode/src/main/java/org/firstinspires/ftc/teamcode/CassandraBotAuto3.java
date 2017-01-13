@@ -169,6 +169,17 @@ public class CassandraBotAuto3 extends LinearOpMode {
      *  2) Move runs out of time
      *  3) Driver stops the opmode running.
      */
+
+    public void shoot()
+    {
+        if (opModeIsActive())
+        {
+            robot.shooterMotor.setPower(1);
+            sleep(1000);
+            robot.shooterMotor.setPower(0);
+        }
+    }
+
     public void encoderDrive(double speed,
                              double leftInches, double rightInches, double sweeperPower,
                              double timeoutS) throws InterruptedException {

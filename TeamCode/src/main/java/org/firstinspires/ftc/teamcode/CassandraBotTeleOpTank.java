@@ -88,8 +88,7 @@ public class CassandraBotTeleOpTank extends OpMode{
         double right = 0.0;
         double sweeper = 0.0;
         boolean right_bumper1;
-        //boolean buttonA2;
-        //boolean buttonDD2; //DD2 stands for D-pad Down 2
+        double shooter = 0.0;
 
 
         //double senseLight = 0.0;
@@ -113,19 +112,16 @@ public class CassandraBotTeleOpTank extends OpMode{
         sweeper = -gamepad2.right_stick_y;
         robot.sweeperMotor.setPower(sweeper);
 
-        //Run Shooter on Button A press (device name 'shooter_drive')
-        //buttonA2 = gamepad2.a;
-        //buttonDD2 = gamepad2.dpad_down;
-        //int shooter1 = (buttonA2) ? 1:0;
-        //int shooter2 = (buttonDD2) ? 1:0;
-        //robot.shooter1Motor.setPower(shooter1);
-        //robot.shooter2Motor.setPower(shooter2);
+        //Run Shooter on Left Stick press (device name 'shooter_drive')
+        shooter = gamepad2.left_stick_y;
+        robot.shooterMotor.setPower(shooter);
 
 
         telemetry.addData("sweeper", "%.2f", sweeper);
         telemetry.addData("left",  "%.2f", left);
         telemetry.addData("right", "%.2f", right);
         telemetry.addData("rbumper1int", rbumper1int);
+        telemetry.addData("shooter", shooter);
         //telemetry.addData("senseLight", "%.3f", senseLight);
         //telemetry.addData("touchsensor", senseTouch);
 
