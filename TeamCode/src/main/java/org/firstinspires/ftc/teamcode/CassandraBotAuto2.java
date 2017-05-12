@@ -73,8 +73,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-
-@Autonomous(name="FarRight", group="Cassandra")
+@Disabled
+@Autonomous(name="Obsolete", group="Cassandra")
 public class CassandraBotAuto2 extends LinearOpMode {
 
 
@@ -88,7 +88,7 @@ public class CassandraBotAuto2 extends LinearOpMode {
     static final double     WHEEL_DIAMETER_INCHES   = 2.85 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.14159265358979323846);
-    static final double     DRIVE_SPEED             = 0.8;
+    static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 0.8;
 
 
@@ -140,7 +140,12 @@ public class CassandraBotAuto2 extends LinearOpMode {
         sleep(200);
 
 
-        encoderDrive(DRIVE_SPEED, 42, 42, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 21, 21, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        sleep(200);
+        shoot(2);
+        sleep(200);
+
+        encoderDrive(DRIVE_SPEED, 21, 21, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
 
@@ -158,13 +163,16 @@ public class CassandraBotAuto2 extends LinearOpMode {
      *  3) Driver stops the opmode running.
      */
 
-    public void shoot()
+    public void shoot(int shots)
     {
-        if (opModeIsActive())
+        while (opModeIsActive() && shots>0)
         {
             robot.shooterMotor.setPower(1);
             sleep(1000);
             robot.shooterMotor.setPower(0);
+            robot.sweeperMotor.setPower(-1);
+            sleep(250);
+            shots = shots-1;
         }
     }
 

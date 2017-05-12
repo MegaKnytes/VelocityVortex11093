@@ -70,7 +70,7 @@ public class CassandraBotTeleOpTank extends OpMode{
     @Override
     public void init_loop() {
     }
-    double position = .5;
+
 
     /*
      * Code to run ONCE when the driver hits PLAY
@@ -87,8 +87,10 @@ public class CassandraBotTeleOpTank extends OpMode{
         double left = 0.0;
         double right = 0.0;
         double sweeper = 0.0;
+        double shooterint;
         boolean right_bumper1;
-        double shooter = 0.0;
+        boolean right_bumper2;
+        boolean shooter;
 
 
         //double senseLight = 0.0;
@@ -99,8 +101,10 @@ public class CassandraBotTeleOpTank extends OpMode{
         left = -gamepad1.left_stick_y;
         right = -gamepad1.right_stick_y;
         right_bumper1 = gamepad1.right_bumper;
+        right_bumper2 = gamepad2.right_bumper;
 
         int rbumper1int = (right_bumper1) ? 8:1;
+        int rbumper2int = (right_bumper2) ? 8:1;
 
         robot.leftMotor.setPower(left/rbumper1int);
         robot.rightMotor.setPower(right/rbumper1int);
@@ -110,11 +114,14 @@ public class CassandraBotTeleOpTank extends OpMode{
 
         //Run sweeper forward and backward (device name 'sweeper_drive')
         sweeper = -gamepad2.right_stick_y;
-        robot.sweeperMotor.setPower(sweeper);
+        robot.sweeperMotor.setPower(sweeper/rbumper2int);
 
         //Run Shooter on Left Stick press (device name 'shooter_drive')
-        shooter = gamepad2.left_stick_y;
-        robot.shooterMotor.setPower(shooter);
+        // set shooter to move in same direction so that no matter which way the driver pushes/pulls
+        // the shooter rotates in the correct direction
+        shooter = gamepad2.dpad_down;
+        shooterint = (shooter) ? 1:0;
+        robot.shooterMotor.setPower(shooterint);
 
 
         telemetry.addData("sweeper", "%.2f", sweeper);

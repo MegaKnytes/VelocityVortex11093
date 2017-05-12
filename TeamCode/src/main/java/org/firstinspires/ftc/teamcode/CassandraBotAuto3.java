@@ -88,7 +88,7 @@ public class CassandraBotAuto3 extends LinearOpMode {
     static final double     WHEEL_DIAMETER_INCHES   = 2.85 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.14159265358979323846);
-    static final double     DRIVE_SPEED             = 0.8;
+    static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 0.8;
 
 
@@ -131,29 +131,22 @@ public class CassandraBotAuto3 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
+
         encoderDrive(DRIVE_SPEED,  23,  23, 0, 5.0);  // S1: Forward 60 Inches with 5 Sec timeout
         sleep(200);
-
-
-        encoderDrive(TURN_SPEED,   10, -10, 0, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
-        // 4 inches should be around 45 degrees, but that is not much better than a guess.
-        //I think that 90 degrees is around 7-8 inches, but I might be wrong.
+        shoot(2);
         sleep(200);
 
+        encoderDrive(TURN_SPEED, 8, -8, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        sleep(200);
 
         encoderDrive(DRIVE_SPEED, 41, 41, 0, 5.0);  // S3: Forward 70 Inches with 8 Sec timeout
         sleep(200);
 
-        encoderDrive(TURN_SPEED, 7, -7, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, 4.25, -4.25, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
-        encoderDrive(DRIVE_SPEED, 3.75, 3.75, 0, 5.0);  // S3: Forward 70 Inches with 8 Sec timeout
-        sleep(200);
-
-        encoderDrive(DRIVE_SPEED, 0, 0, 1, 3.0);  // S3: Forward 12 Inches with 4 Sec timeout
-        sleep(200);
-
-        encoderDrive(DRIVE_SPEED,  25,  25, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  27,  27, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
         sleep(200);
 
         telemetry.addData("Path", "Complete");
@@ -170,13 +163,18 @@ public class CassandraBotAuto3 extends LinearOpMode {
      *  3) Driver stops the opmode running.
      */
 
-    public void shoot()
+    public void shoot(int shots)
     {
-        if (opModeIsActive())
+        while (opModeIsActive() && shots>0)
         {
             robot.shooterMotor.setPower(1);
-            sleep(1000);
+            sleep(800);
             robot.shooterMotor.setPower(0);
+            sleep(250);
+            robot.sweeperMotor.setPower(-1);
+            sleep(250);
+            robot.sweeperMotor.setPower(0);
+            shots = shots-1;
         }
     }
 

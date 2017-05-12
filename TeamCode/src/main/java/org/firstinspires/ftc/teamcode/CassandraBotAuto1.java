@@ -131,9 +131,10 @@ public class CassandraBotAuto1 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  24,  24, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
-        sleep(200);
 
+        encoderDrive(DRIVE_SPEED,  21,  21, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
+        shoot(2);
+        sleep(200);
 
         encoderDrive(TURN_SPEED,   -9, 9, 0, 4.0);  // S2: Turn Left 4 Inches with 4 Sec timeout,
         // 4 inches should be around 45 degrees, but that is not much better than a guess.
@@ -141,20 +142,13 @@ public class CassandraBotAuto1 extends LinearOpMode {
         sleep(200);
 
 
-        encoderDrive(DRIVE_SPEED, 39, 39, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 33, 33, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
-        encoderDrive(TURN_SPEED, -3.75, 3.75, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, -4.5, 4.5, 0, 4.0);  // S3: Forward 12 Inches with 4 Sec timeout
         sleep(200);
 
-        //amy
-        encoderDrive(DRIVE_SPEED, 4, 4, 0, 5.0);  // S3: Forward 70 Inches with 8 Sec timeout
-        sleep(200);
-
-        encoderDrive(DRIVE_SPEED, 0, 0, 1, 3.0);  // S3: Forward 12 Inches with 4 Sec timeout
-        sleep(200);
-
-        encoderDrive(DRIVE_SPEED,  25,  25, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  28,  28, 0, 5.0);  // S1: Forward 18 Inches with 5 Sec timeout
         sleep(200);
 
 
@@ -172,16 +166,19 @@ public class CassandraBotAuto1 extends LinearOpMode {
      *  3) Driver stops the opmode running.
      */
 
-    public void shoot()
+    public void shoot(int shots)
     {
-        if (opModeIsActive())
+        while (opModeIsActive() && shots>0)
         {
             robot.shooterMotor.setPower(1);
-            sleep(1000);
+            sleep(800);
             robot.shooterMotor.setPower(0);
+            sleep(250);
+            robot.sweeperMotor.setPower(-1);
+            sleep(250);
+            shots = shots-1;
         }
     }
-
 
     public void encoderDrive(double speed,
                              double leftInches, double rightInches, double sweeperPower,

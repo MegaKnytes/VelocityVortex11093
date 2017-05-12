@@ -68,6 +68,8 @@ public class HardwareCassandraBot
         sweeperMotor.setPower(0);
         shooterMotor.setPower(0);
 
+        // remove later
+
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
